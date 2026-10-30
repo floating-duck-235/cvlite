@@ -65,6 +65,11 @@ def test_package_source_has_no_comments_or_docstrings(path):
     assert not has_docstrings(source)
 
 
+def test_version_matches_pyproject():
+    pyproject = (PACKAGE_DIR.parent / "pyproject.toml").read_text()
+    assert 'version = "' + cvlite.__version__ + '"' in pyproject
+
+
 def test_path_is_inserted():
     assert "image_path = '/content/cat.png'" in cvlite.get_code(1, "/content/cat.png")
     assert "video_path = '/content/clip.mp4'" in cvlite.get_code(7, "/content/clip.mp4")
